@@ -20,8 +20,7 @@ function createMedalTable(medals) {
         medalTable[country] = medalTable[country] + pointsMap[position];
       }
     }
-    // need to make the below into javascript instead of python, likely an easier way to make it with sorting from higest score
-    // sortedTable = dict(sorted(medalTable.items(), key=lambda x: x[1], reverse=True))
+    // I just need to sort it so it ends it with the most points on the top, however I'm still not sure why Italy would be first, in that list out of the 4 values
     return medalTable;
 }
 
