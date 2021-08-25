@@ -1,7 +1,47 @@
 function createMedalTable(medals) {
-    // Parse the medal data to produce a medaltable
-    // The winner gets 3 points, second place 2 points and third place 1 point
-    return
+  // The winner gets 3 points, second place 2 points and third place 1 point
+  const medalTable = {};
+
+  const pointsMap = {
+      1: 3,
+      2: 2,
+      3: 1
+  };
+  for(let event of medals) {
+      const podiumResult = event.podium;
+      for(let positionData of podiumResult) {
+          const temp = positionData.split(".");
+          const position = temp[0];
+          const country = temp[1];
+          if(!(country in medalTable)) {
+              medalTable[country] = 0;
+          }
+          medalTable[country] = medalTable[country] + pointsMap[position];
+      }
+  }
+
+  // Returning medalTable above would certainly show a list with points but not ordered correctly
+  // I just need to sort it so it ends it with the most points on the top
+  // However I'm still not sure why Italy would be first, in that list out of the 4 values
+  // Swappin the a and b in the sort did not help, however keeping it the same and reversing the list helped show it correctly
+
+  let medalTableSortable = [];
+  for (let country in medalTable) {
+      medalTableSortable.push([country,medalTable[country]]);
+  }
+
+  medalTableSortable.sort(function(a, b) {
+      return a[1] - b[1];
+  }).reverse();
+
+  const medalTableSorted = {};
+
+  for(let country of medalTableSortable){
+      medalTableSorted[country[0]] = country[1];
+  }
+
+
+  return medalTableSorted;
 }
 
 describe("Medal Table Generator", () => {
