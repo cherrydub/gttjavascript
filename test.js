@@ -80,20 +80,10 @@ const medals = [{
             ];
 
 
-
+//just wanted to compare as getting them to order up correctly was quite difficult for me
 
 console.log(createMedalTable(medals))
 
-
-// adding all the stuff below to test the code
-
-//console.log(medalTable)
-
-console.log(createMedalTable(medals) == medalTable)
-
-
 console.log(medalTable)
-
-// Sorted by highest points first
 
 
