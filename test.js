@@ -1,28 +1,52 @@
-//run me to test the script, the medals.test.js has a few more things within the code to see if they 2 tables match up identically
+const a = 5
+const b = 5
 
 function createMedalTable(medals) {
-    // The winner gets 3 points, second place 2 points and third place 1 point
-    const medalTable = {};
-    const pointsMap = {
+  // The winner gets 3 points, second place 2 points and third place 1 point
+  const medalTable = {};
+
+  const pointsMap = {
       1: 3,
       2: 2,
       3: 1
-    };
-    for(let event of medals) {
+  };
+  for(let event of medals) {
       const podiumResult = event.podium;
       for(let positionData of podiumResult) {
-        const temp = positionData.split(".");
-        const position = temp[0];
-        const country = temp[1];
-        if(!(country in medalTable)) {
-          medalTable[country] = 0;
-        }
-        medalTable[country] = medalTable[country] + pointsMap[position];
+          const temp = positionData.split(".");
+          const position = temp[0];
+          const country = temp[1];
+          if(!(country in medalTable)) {
+              medalTable[country] = 0;
+          }
+          medalTable[country] = medalTable[country] + pointsMap[position];
       }
-    }
-    // I just need to sort it so it ends it with the most points on the top, however I'm still not sure why Italy would be first, in that list out of the 4 values
-    return medalTable;
+  }
+
+  // Returning medalTable above would certainly show a list with points but not ordered correctly
+  // I just need to sort it so it ends it with the most points on the top
+  // However I'm still not sure why Italy would be first, in that list out of the 4 values
+  // Swappin the a and b in the sort did not help, however keeping it the same and reversing the list helped show it correctly
+
+  let medalTableSortable = [];
+  for (let country in medalTable) {
+      medalTableSortable.push([country,medalTable[country]]);
+  }
+
+  medalTableSortable.sort(function(a, b) {
+      return a[1] - b[1];
+  }).reverse();
+
+  const medalTableSorted = {};
+
+  for(let country of medalTableSortable){
+      medalTableSorted[country[0]] = country[1];
+  }
+
+
+  return medalTableSorted;
 }
+
 
 // so i cut off all the extra stuff from the origial medal.test since i wasnt able to test the code since it didnt match up
 // lastly need to add " " around the country names like below
@@ -67,7 +91,13 @@ console.log(createMedalTable(medals))
 
 //console.log(medalTable)
 
-//console.log(createMedalTable(medals) == medalTable)
+console.log(createMedalTable(medals) == medalTable)
+
+
+console.log(medalTable)
 
 // The values end up the same but technically they do not 'equal' eachother
 // Sorted by highest points first
+
+
+console.log(a == b)
