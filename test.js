@@ -1,5 +1,3 @@
-const a = 5
-const b = 5
 
 function createMedalTable(medals) {
   // The winner gets 3 points, second place 2 points and third place 1 point
@@ -96,8 +94,6 @@ console.log(createMedalTable(medals) == medalTable)
 
 console.log(medalTable)
 
-// The values end up the same but technically they do not 'equal' eachother
 // Sorted by highest points first
 
 
-console.log(a == b)
